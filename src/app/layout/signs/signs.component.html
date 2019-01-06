@@ -1,0 +1,141 @@
+<div [@routerTransition]>
+    <div class="card">
+        <h4 class="card-header">SIGNS ({{screenSigns.length}})
+            <a (click)="addSign()">
+                <span class="fa fa-plus-circle"></span>
+            </a>
+        </h4>
+
+        <!--div class="row justify-content-around">
+            <div class="col-5">
+            </div>
+            <div class="col-5 input-group-prepend">
+                <div class="card card-body" style="border:0px">
+                </div>
+            </div>
+            <div class="col-2 input-group-prepend">
+                <div class="card card-body" style="border:0px">
+                </div>
+            </div>
+        </div-->
+
+        <div class="card-block">
+            <table class="table table-borderless">
+            </table>
+
+            <table class="table table-striped">
+                <thead class="thead-default">
+                <tr>
+                    <th></th>
+                    <th>Client</th>
+                    <th>Type</th>
+                    <th>Image</th>
+                    <th>Project</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="sb-1">
+                            <input class="" [(ngModel)]="clientQuery"
+                                   (keyup)="search(clientQuery, typeQuery, projectQuery)"
+                                   type="text">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="sb-1">
+                            <input class="" [(ngModel)]="typeQuery"
+                                   (keyup)="search(clientQuery, typeQuery, projectQuery)"
+                                   type="text">
+                        </div>
+                    </td>
+                    <td></td>
+                    <td>
+                        <div class="sb-1">
+                            <input class="" [(ngModel)]="projectQuery"
+                                   (keyup)="search(clientQuery, typeQuery, projectQuery)"
+                                   type="text">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr *ngFor="let screenSign of screenSigns | paginate: { itemsPerPage: pageSize, currentPage: page };
+                        let rowNumber = index">
+
+                    <td>
+                        <input type="checkbox" [(ngModel)]="screenSign.xxx"
+                                               (click)="setClickedRow(screenSign)"/>
+                    </td>
+                    <!-- td>{{rowNumber + 1}}</td -->
+                    <!--td>{{path.title | truncate: 25}}</td-->
+                    <td>{{screenSign.client | truncate: 20}}</td>
+                    <td>{{screenSign.type | truncate: 20}}</td>
+                    <td></td>
+                    <td>{{screenSign.project | truncate: 20}}</td>
+                    <td>
+                        <!--button class="btn btn-sm btn-info" (click)="openSign(screenSign)"><i
+                            class="fa fa-dot-circle-o"></i>
+                            Open
+                        </button-->
+                        <button class="btn btn-sm btn-warning" (click)="editSign(screenSign)"><i
+                            class="fa fa-pencil"></i> Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteSign(screenSign)"><i
+                            class="fa fa-trash"></i>
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <!--table class="table table-borderless">
+                <tbody>
+                <tr>
+                    <td>
+                      <button class="btn btn-sm btn-primary" (click)="goHome()"><i class="fa">DELETE SELECTED</i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="addPath()"><i class="fa">ADD SIGN</i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table-->
+        </div>
+    </div>
+    <!--p-->
+    <table class="table table-borderless">
+        <tbody>
+        <tr>
+            <td>
+                <pagination-controls *ngIf="queryComplete && screenSigns && screenSigns.length > 10"
+                                     (pageChange)="page = $event"
+                                     previousLabel="Indietro"
+                                     nextLabel="Avanti">
+                </pagination-controls>
+            </td>
+        </tr>
+        <tr>
+            <div class="row justify-content-md-center">
+                <div class="col col-lg-2">
+                    <button class="btn btn-sm btn-primary" (click)="deleteSelected()"><i class="fa">DELETE SELECTED</i></button>
+                </div>
+                <div class="col col-lg-2">
+                    <button class="btn btn-sm btn-primary" (click)="addSign()"><i class="fa">ADD SIGN</i></button>
+                </div>
+                <div class="col col-lg-2">
+                    <button class="btn btn-sm btn-primary" (click)="deleteSelected()"><i class="fa">SET SELECTED TO LIGS</i></button>
+                </div>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+

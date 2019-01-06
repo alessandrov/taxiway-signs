@@ -1,0 +1,65 @@
+<div [@routerTransition]>
+    <div class="card">
+        <h4 class="card-header">CLIENTS ({{clients.length}}) &nbsp;
+            <a href="#">
+                <span class="fa fa-plus-circle fa-lg"></span>
+            </a>
+        </h4>
+
+        <div class="card-block">
+            <table class="table table-striped">
+                <thead class="thead-default">
+                    <tr>
+                        <!--th>#</th-->
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>No. Signs</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="clients.length === 0">
+                    <tr>
+                        <td colspan="4">There's no client to show</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr *ngFor="let client of clients | paginate: { itemsPerPage: pageSize, currentPage: page }; let rowNumber = index">
+                        <!--td>{{rowNumber + 1}}</td-->
+                        <!--td>{{path.title | truncate: 25}}</td-->
+                        <td>{{client.name}}</td>
+                        <td>{{client.location}}</td>
+                        <td>{{client.signs}}</td>
+                        <td>
+                            <button class="btn btn-sm btn-info" (click)="openClient(client)"><i
+                                class="fa fa-dot-circle-o"></i>
+                                Open
+                            </button>
+                            <button class="btn btn-sm btn-warning" (click)="editClient(client)"><i
+                                class="fa fa-pencil"></i> Edit
+                            </button>
+                            <button class="btn btn-sm btn-danger" (click)="deleteClient(client)"><i
+                                class="fa fa-trash"></i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p>
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <td>
+                    <pagination-controls *ngIf="queryComplete && clients && clients.length > 10"
+                                         (pageChange)="page = $event"
+                                         previousLabel="Indietro"
+                                         nextLabel="Avanti">
+                    </pagination-controls>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

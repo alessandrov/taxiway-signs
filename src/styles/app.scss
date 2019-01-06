@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "bootstrap/bootstrap";
+@import "spinner";
+@import "utils";
+@import "rtl";
+@import "responsive";
+
+@media print {
+    .breadcrumb {
+        display: none !important;
+    }
+}
+
+html, body { height: 100%; }
+
+html {
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.table td, .table th, .table tr, .table div {
+    text-align: center;
+    //width: 15%;
+    padding: .45rem;
+
+    overflow-x: auto;
+    //display: block;
+    //width: 100%;
+}
+
+.steps-global {
+    margin-left: 2%;
+    top: 0px;
+}
+
+.card {
+    margin-left: 2%;
+    top: 0px;
+}
+

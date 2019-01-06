@@ -1,0 +1,512 @@
+<div [@routerTransition]>
+    <div class="steps-global">
+        <aw-wizard>
+
+            <!----------------------------STEP 1-------------------->
+            <aw-wizard-step stepTitle="Title of step 1">
+
+                <div class="container">
+                    <div class="jumbotron text-center">
+                        <h3>GENERAL PROPERTIES</h3>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-3 mx-auto">
+                            <div class="text-center">
+                                <label for="color-input">Color</label>
+                                <input class="form-control" id="color-input" type="text" [(ngModel)]="newSign.color">
+                            </div>
+                        </div>
+
+                        <div class="col-3 mx-auto">
+                            <div class="text-center">
+                                <label for="quantity-input">Quantity</label>
+                                <input class="form-control" id="quantity-input" type="text"
+                                       [(ngModel)]="newSign.quantity">
+                            </div>
+                        </div>
+
+                        <div class="col-3 mx-auto">
+                            <div class="text-center">
+                                <label for="revision-input">Revision</label>
+                                <input class="form-control" id="revision-input" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-3 mx-auto">
+                            <div class="text-center">
+                                <label for="project-input">Project</label>
+
+                                <select id="project-input" [(ngModel)]="newSign.project"
+                                        (change)="onProjectChange($event.target.value)"
+                                        class="form-control">
+                                    <option *ngFor="let project of projectArray" [value]="project.id">
+                                        {{project.projectName}}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-3 mx-auto">
+                            <div class="text-center">
+                                <label for="wh1">Type</label>
+                                <select id="wh1" class='form-control' [(ngModel)]="newSign.type">
+                                    <option value='LIMS'>LIMS</option>
+                                    <option value='LIGS'>LIGS</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-3 mx-auto">
+                            <div class="text-center">
+                                <label for="wh2">......</label>
+                                <input class="form-control" id="wh2" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-3 mx-auto">
+                            <div class="text-center"></div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse">
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info" (click)="onStep1Next()" awNextStep>Next Step</div>
+                        </div>
+                    </div>
+                </div>
+
+            </aw-wizard-step>
+
+            <!----------------------------STEP 2-------------------->
+            <aw-wizard-step stepTitle="Title of step 2">
+
+                <div *ngIf="!isLIGS()" class="container">
+                    <div class="jumbotron text-center">
+                        <h3>TBD</h3>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-3">
+                            <div>
+                                <div class="btn-group btn-group-vertical">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="mode" [value]="true"
+                                               [(ngModel)]="newSign.informationSign">INFORMATION
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="mode" [value]="false"
+                                               [(ngModel)]="newSign.informationSign">MANDATORY
+                                    </label>
+                                    <label class="radio-inline">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse">
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info" (click)="onStep2Next()" awNextStep>Next Step</div>
+                        </div>
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info" awPreviousStep>Previous Step</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div *ngIf="isLIGS()" class="container">
+
+                    <div class="jumbotron text-center">
+                        <h3>TBD</h3>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-3">
+                            <div>
+                                <div class="btn-group btn-group-vertical">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsDirection" [value]="true" selected
+                                               [(ngModel)]="newSign.leftRight">DESTRA
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsDirection" [value]="false"
+                                               [(ngModel)]="newSign.leftRight">SINISTRA
+                                    </label>
+                                    <label class="radio-inline">
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm col-xs-3">
+                            <div>
+                                <div class="btn-group btn-group-vertical">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsSide" [value]="true"
+                                               [(ngModel)]="newSign.oneTwoSides">1 FACCIA
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsSide" [value]="false"
+                                               [(ngModel)]="newSign.oneTwoSides">2 FACCE
+                                    </label>
+                                    <label class="radio-inline">
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm col-xs-3">
+                            <div>
+                                <div class="btn-group btn-group-vertical">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsSize" [value]="true"
+                                               [(ngModel)]="newSign.size">300
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optionsSize" [value]="false"
+                                               [(ngModel)]="newSign.size">400
+                                    </label>
+                                    <label class="radio-inline">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm col-xs-3">
+                            <div>
+                                <div class="btn-group btn-group-vertical">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="modeV" [value]="true"
+                                               (change)="onMandatoryInformationChange($event.target.value)"
+                                               [(ngModel)]="newSign.informationSign">INFORMATION
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="modeV" [value]="false"
+                                               (change)="onMandatoryInformationChange($event.target.value)"
+                                               [(ngModel)]="newSign.informationSign">MANDATORY
+                                    </label>
+                                    <label class="radio-inline">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse">
+                        <div class="mt-2 p-2">
+                            <button type="button" class="btn btn-sm btn-info" [disabled]="!step2OK" (click)="onStep2Next()" awNextStep>Next Step
+                            </button>
+                        </div>
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info" awPreviousStep>Previous Step</div>
+                        </div>
+                    </div>
+                </div>
+
+            </aw-wizard-step>
+
+            <!----------------------------STEP 3-------------------->
+            <aw-wizard-step stepTitle="Title of step 3">
+
+                <div *ngIf="isInformationSign()" class="container">
+                    <div class="jumbotron text-center">
+                        <h3>TBD</h3>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-around">
+                        <div class="p-2">
+                            <!--GIALLO
+                            <select id="whdfSD1" class='select custom-select' [(ngModel)]="newSign.todo3">
+                                <option value='0'>0</option>
+                                <option value='1'>1</option>
+                                <option value='2'>2</option>
+                                <option value='3'>3</option>
+                                <option value='4'>4</option>
+                            </select>-->
+
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle" href="" role="button" id="xxx1"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    GIALLO
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item">0</a>
+                                    <a class="dropdown-item">1</a>
+                                    <a class="dropdown-item">2</a>
+                                    <a class="dropdown-item">3</a>
+                                    <a class="dropdown-item">4</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-2">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" name="mode" [value]="true"
+                                       [(ngModel)]="newSign.todo4">NERO
+                            </label>
+                        </div>
+
+                        <div class="p-2">
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle" href="" role="button" id="xxAx1"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    GIALLO
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item">0</a>
+                                    <a class="dropdown-item">1</a>
+                                    <a class="dropdown-item">2</a>
+                                    <a class="dropdown-item">3</a>
+                                    <a class="dropdown-item">4</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse">
+                        <div class="mt-2 p-2">
+                            <button class="btn btn-sm btn-info" type="button" (click)="onStep2Next()" awNextStep>Next Step</button>
+                        </div>
+                        <div class="mt-2 p-2">
+                            <button class="btn btn-sm btn-info" type="button" awPreviousStep>Previous Step</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="!isInformationSign()" class="container">
+                    <div class="jumbotron text-center">
+                        <h3>TBD</h3>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="p-3">
+                            <label style="background-color: white; border: 0px" class="btn btn-secondary form-inline">
+                                <input type="radio" name="options" id="opt2ion1"><span style="color:red">RED</span> - <span style="color:black">BLACK</span>
+                            </label>
+                        </div>
+
+                        <div class="p-3">
+                            <label style="background-color: white; border: 0px" class="btn btn-secondary form-inline">
+                                <input type="radio" name="options" id="opt2idon1"><span style="color:black">BLACK</span> - <span style="color:red">RED</span>
+                            </label>
+                        </div>
+
+                        <div class="p-3">
+                            <label style="background-color: white; border: 0px" class="btn btn-secondary form-inline">
+                                <input type="radio" name="options" id="opt2iodn1"><span style="color:red; font-size: medium">RED</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse">
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info" (click)="onStep2Next()" awNextStep>Next Step</div>
+                        </div>
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info" awPreviousStep>Previous Step</div>
+                        </div>
+                    </div>
+                </div>
+
+            </aw-wizard-step>
+
+            <!----------------------------STEP 4-------------------->
+            <aw-wizard-step stepTitle="Title of step 4">
+
+                <div class="container">
+                    <div class="jumbotron text-center">
+                        <h3>TBD</h3>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm col-xs-1">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse">
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info"  (click)="finishFunction()">Finish</div>
+                        </div>
+                        <div class="mt-2 p-2">
+                            <div class="btn btn-sm btn-info"  awPreviousStep>Previous Step</div>
+                        </div>
+                    </div>
+                </div>
+            </aw-wizard-step>
+
+        </aw-wizard>
+    </div>
+</div>
