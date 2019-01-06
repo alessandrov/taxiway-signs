@@ -1,4 +1,4 @@
-## Sample single page application, no backend provided, I developed it for a company in the taxiway signs sector.
+## Sample single page application I developed for a company in the taxiway signs sector. No backend provided.
 
 ### Prerequisites
 
